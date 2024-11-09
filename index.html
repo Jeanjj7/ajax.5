@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="imagem1"><img src="pref_sp.png"></div>
+
+    <div id="cx1">
+        <div id="imagem2"><img src="portal.png"></div>
+        <h1>Nova solicitação</h1>
+        <label>Nome Completo:</label> 
+        <input type="text" id="nome_completo"> <br><br>
+    
+        <label>CPF:</label>
+        <input type="text" id="cpf" name="cpf"> <br><br>
+
+        <label >Email:</label>
+        <input type="email" id="email" ><br><br>
+    
+        <label>Telefone:</label> 
+        <input type="text" id="telefone" > <br><br>
+    
+       <label> Setor Responsável:</label>
+        <select id="setor_resp">
+            <option value="">Selecione</option>
+            <option value="finanças">Finanças</option>
+            <option value="Adminstração">Administração</option>
+            <option value="Infraestrutura">Infraestrutura</option>
+        </select><br><br>
+    
+       <label>Detalhes:</label> <br>
+        <textarea id="detalhes"></textarea><br><br>
+    
+        <button id="bntenviar">Enviar</button><br><br>
+    </div>
+
+   
+
+    <script>
+        $("#bntenviar").click(function(){
+            var nome_capturada = $("#nome_completo").val();
+            var cpf_capturada = $("#cpf").val();
+            var email_capturada = $("#email").val();
+            var tel_capturada = $("#telefone").val();
+            var setor_capturada = $("#setor_resp").val();
+            var det_capturada = $("#detalhes").val();
+
+            $.ajax({
+                url:"catrastar.php",
+                type:"POST",
+                data:{
+                    nome_completo: nome_capturada,
+                    cpf: cpf_capturada,
+                    email: email_capturada,
+                    telefone: tel_capturada,
+                    setor_resp: setor_capturada,
+                    detalhes: det_capturada
+                },
+                success: function(resposta){
+                        alert(resposta);
+
+
+                    },
+                error: function(){
+                        alert("Erro ao Cadratra!!");
+                    }
+            });
+
+
+        });
+    </script>
+</body>
+</html>
